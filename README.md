@@ -1,4 +1,4 @@
-html
+
 <p align="center">
   <img src="docs/chatgpt-image-2025-10-02-22-33-51.png" alt="PAXECT logo" width="200"/>
 </p>
