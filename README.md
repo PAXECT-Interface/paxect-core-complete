@@ -17,6 +17,7 @@
 Cross-platform, self-tuning, and open-source — built for real-world enterprise innovation, digital hygiene, and NIS2-aligned compliance.
 
 **Status:** v1.0.0 — Initial Public Release — October 22, 2025
+
 ---
 
 ## Overview
