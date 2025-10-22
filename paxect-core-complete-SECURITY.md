@@ -1,3 +1,6 @@
+<p align="center">
+  <img src="ChatGPT%20Image%202%20okt%202025,%2022_33_51.png" alt="PAXECT logo" width="200"/>
+</p>
 
 # Security Policy — PAXECT Core Complete
 
