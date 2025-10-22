@@ -1,5 +1,7 @@
 
 
+
+
 [![Star this repo](https://img.shields.io/badge/⭐%20Star-this%20repo-orange)](../../stargazers)
 [![CI](https://img.shields.io/badge/CI-passing-brightgreen.svg)](../../actions)
 [![CodeQL](https://img.shields.io/badge/CodeQL-active-lightgrey.svg)](../../actions)
@@ -8,62 +10,59 @@
 [![Security](https://img.shields.io/badge/Security-responsible%20disclosure-informational)](./SECURITY.md)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE)
 
-# PAXECT Core Complete — Deterministic Offline-First Runtime Ecosystem
+# PAXECT Core Complete
 
-**Deterministic, offline-first runtime for secure, reproducible, and cross-platform data pipelines.**  
-Designed for modern enterprises, developers, and researchers — fully auditable, zero telemetry, and open-source by design.
-
----
-
-## 🌐 Overview
-
-**PAXECT Core Complete** is the **official reference implementation** of the PAXECT ecosystem —  
-a unified, reproducible, **offline-first runtime** built for **secure, deterministic data pipelines**.  
-It merges five verified modules — **Core**, **AEAD Hybrid**, **Polyglot**, **SelfTune**, and **Link** —  
-into a single **cross-platform ecosystem** with **end-to-end reproducibility**, **10 integrated demos**,  
-and enterprise-grade observability.
-
-🧩 **Keywords:** deterministic runtime · reproducible pipelines · secure containers · offline-first · audit-ready · cross-platform · zero-AI · data integrity · digital hygiene · NIS2 compliance
+**Deterministic, offline-first runtime ecosystem for secure, reproducible, and auditable data pipelines.**  
+Cross-platform, self-tuning, and open-source — built for real-world enterprise innovation, digital hygiene, and NIS2-aligned compliance.
 
 ---
 
-## 🚀 Key Highlights
+## Overview
 
-- **Unified Ecosystem:** Combines all verified modules (Core, AEAD Hybrid, SelfTune, Polyglot, Link)  
-- **Deterministic Pipelines:** Bit-identical results across Linux, macOS, Windows, BSD, Android, and iOS  
-- **Offline-First:** No network, no telemetry — privacy and security by default  
-- **Enterprise-Grade Validation:** 10 reproducible demo pipelines with full observability endpoints  
-- **Zero-AI Runtime:** SelfTune manages overhead and load without heuristics or ML  
-- **Sustainable Open Source:** Apache-2.0 licensed, transparent governance, and long-term maintainability
+**PAXECT Core Complete** is the official reference implementation of the PAXECT ecosystem.  
+It unifies the verified modules — **Core**, **AEAD Hybrid**, **Polyglot**, **SelfTune**, and **Link** —  
+into one reproducible, cross-OS runtime featuring **10 integrated demos**, advanced observability,  
+and deterministic performance across multiple environments and operating systems.
+
+### Key Highlights
+- **Unified Ecosystem:** Combines Core, AEAD Hybrid, SelfTune, Polyglot, and Link into one verified deterministic bundle.  
+- **Reproducible Pipelines:** Bit-identical behavior across Linux, macOS, Windows, FreeBSD, Android, and iOS.  
+- **Offline-First:** Zero telemetry and no network dependencies — privacy and security by design.  
+- **Enterprise-Grade Validation:** Ten reproducible demo pipelines with built-in audit and metrics endpoints.  
+- **Zero-AI Runtime:** The SelfTune plugin provides adaptive control without machine learning or heuristics.  
+- **Open Source Forever:** Apache-2.0 licensed, transparent governance, and a fair “Path to Paid” sustainability model.
 
 ---
 
-## 🧰 Installation
+## Installation
 
 ### Requirements
-- **Python 3.9–3.12** (recommended 3.11+)  
-- Supported OS: **Linux**, **macOS**, **Windows**, **FreeBSD**, **OpenBSD**, **Android (Termux)**, **iOS (Pyto)**  
-- Works fully **offline**; no dependencies or external services required.
+- **Python 3.9 – 3.12** (recommended 3.11+)
+- Works on **Linux**, **macOS**, **Windows**, **FreeBSD**, **OpenBSD**, **Android (Termux)**, and **iOS (Pyto)**.
+- No external dependencies or internet connection required — fully offline-first runtime.
 
-### Optional Tools
-- `bash`, `jq`, `dos2unix` (for certain demos)  
+### Optional Utilities
+Some demos use these standard tools if available:
+- `bash` (for `demo_05_link_smoke.sh`)
+- `dos2unix` (for normalizing line endings)
+- `jq` (for formatting JSON output)
 
-### Quick Setup
-
+### Install
 ```bash
 git clone https://github.com/PAXECT-Interface/paxect-core-complete.git
 cd paxect-core-complete
-python3 -m venv venv && source venv/bin/activate
+python3 -m venv venv
+source venv/bin/activate      # on Windows: venv\Scripts\activate
 pip install -e .
 ````
 
-Verify:
+Verify the deterministic core import:
 
 ```bash
 python3 -c "import paxect_core; print('PAXECT Core OK')"
 ```
 
-Run any demo from the `demos/` directory.
+Then run any of the integrated demos from the `demos/` folder to validate deterministic reproducibility.
 
 ---
 
@@ -99,33 +98,37 @@ paxect-core-complete/
 
 ---
 
-## ⚙️ Modules
+## Modules
 
-| Module                           | Purpose                                                                  |
-| -------------------------------- | ------------------------------------------------------------------------ |
-| **paxect_core.py**               | Deterministic runtime · encoding/decoding · CRC32 + SHA-256 verification |
-| **paxect_aead_hybrid_plugin.py** | Hybrid AES-GCM / ChaCha20-Poly1305 encryption                            |
-| **paxect_polyglot_plugin.py**    | Cross-language bridge · UTF-safe interoperability                        |
-| **paxect_selftune_plugin.py**    | Adaptive self-tuning engine · no AI or heuristics                        |
-| **paxect_link_plugin.py**        | Secure inbox/outbox relay · policy validation                            |
+| Module                           | Purpose                                                           |
+| -------------------------------- | ----------------------------------------------------------------- |
+| **paxect_core.py**               | Deterministic runtime · encode/decode · CRC32 + SHA-256 checksums |
+| **paxect_aead_hybrid_plugin.py** | Hybrid AES-GCM / ChaCha20-Poly1305 encryption for data integrity  |
+| **paxect_polyglot_plugin.py**    | Cross-language bridge · UTF-safe transformation between runtimes  |
+| **paxect_selftune_plugin.py**    | Adaptive ε-greedy self-tuning · resource-aware control · no AI    |
+| **paxect_link_plugin.py**        | Secure inbox/outbox relay · policy validation · offline file sync |
 
----
-
-## 🧩 Official Plugins
-
-| Plugin              | Scope                   | Highlights                                                 | Repo                                                                                       |
-| ------------------- | ----------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| **Core Plugin**     | Deterministic container | `.freq v42`, multi-channel, CRC32+SHA-256, no-AI           | [paxect-core-plugin](https://github.com/PAXECT-Interface/paxect-core-plugin)               |
-| **AEAD Hybrid**     | Encryption & Integrity  | Hybrid AES-GCM/ChaCha20-Poly1305                           | [paxect-aead-hybrid-plugin](https://github.com/PAXECT-Interface/paxect-aead-hybrid-plugin) |
-| **Polyglot**        | Language Bridges        | Python · Node.js · Go — deterministic across runtimes      | [paxect-polyglot-plugin](https://github.com/PAXECT-Interface/paxect-polyglot-plugin)       |
-| **SelfTune 5-in-1** | Runtime Control         | Guardrails, jitter smoothing, metrics, no-AI overhead      | [paxect-selftune-plugin](https://github.com/PAXECT-Interface/paxect-selftune-plugin)       |
-| **Link**            | Cross-OS File Relay     | Inbox/outbox bridge, auto encode/decode `.freq` containers | [paxect-link-plugin](https://github.com/PAXECT-Interface/paxect-link-plugin)               |
+![PAXECT Architecture](docs/paxect_architecture_brand_v18.svg)
 
 ---
 
-## 🧪 Demo Suite (01–10)
+## Plugins (Official)
 
-Run all demos directly:
+| Plugin                         | Scope                           | Highlights                                                                   | Repo                                                                                       |
+| ------------------------------ | ------------------------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| **Core**                       | Deterministic data container    | `.freq` v42 · multi-channel · CRC32 + SHA-256 · cross-OS · offline-first     | [paxect-core-plugin](https://github.com/PAXECT-Interface/paxect-core-plugin)               |
+| **AEAD Hybrid**                | Encryption & Integrity          | Hybrid AES-GCM / ChaCha20-Poly1305 — fast, zero dependencies, cross-platform | [paxect-aead-hybrid-plugin](https://github.com/PAXECT-Interface/paxect-aead-hybrid-plugin) |
+| **Polyglot**                   | Multi-language bridge           | Python · Node.js · Go — deterministic pipeline parity                        | [paxect-polyglot-plugin](https://github.com/PAXECT-Interface/paxect-polyglot-plugin)       |
+| **SelfTune 5-in-1**            | Runtime control & observability | Guardrails, backpressure, overhead limits, metrics, and jitter smoothing     | [paxect-selftune-plugin](https://github.com/PAXECT-Interface/paxect-selftune-plugin)       |
+| **Link (Inbox/Outbox Bridge)** | Cross-OS file exchange          | Shared-folder relay: auto-encode/decode `.freq` containers deterministically | [paxect-link-plugin](https://github.com/PAXECT-Interface/paxect-link-plugin)               |
+
+**Plug-and-play:** Core operates standalone, with optional plugins attachable via flags or config. Deterministic behavior remains identical across environments.
+
+---
+
+## 🧪 Demo Suite (01 – 10)
+
+Run reproducible demos from the repository root:
 
 ```bash
 python3 demos/demo_01_quick_start.py
@@ -140,115 +143,128 @@ python3 demos/demo_09_enterprise_all_in_one.py
 python3 demos/demo_10_enterprise_stability_faults.py
 ```
 
-All produce structured JSON logs under `/tmp/` for deterministic verification.
+All demos generate structured JSON audit logs under `/tmp/`, verifiable through deterministic SHA-256 outputs.
+
+---
+
+## Testing & Verification
+
+Internal `pytest` suites validate core reproducibility.
+End-users can rely on the integrated demo suite (01–10) for deterministic verification.
+Each demo reports performance, checksum validation, and exit status cleanly.
 
 ---
 
 ## 🔒 Security & Privacy
 
-* **Offline-first** by design — zero telemetry
-* Sensitive variables handled via environment configs
-* AEAD Hybrid encryption supports AES-GCM / ChaCha20-Poly1305
-* Strict parser validation with fail-stop behavior
-* Follows responsible disclosure in [`SECURITY.md`](./SECURITY.md)
+* Default mode: **offline**, **zero telemetry**.
+* Sensitive configuration via environment variables.
+* AEAD Hybrid is simulation-grade; for production, integrate with verified crypto or HSM.
+* Adheres to **Digital Hygiene 2027** and **NIS2** security standards.
+* Follows responsible disclosure in [`SECURITY.md`](./SECURITY.md).
 
 ---
 
 ## 🏢 Enterprise Pack
 
 See [`ENTERPRISE_PACK_OVERVIEW.md`](./ENTERPRISE_PACK_OVERVIEW.md)
+for extended features and enterprise integration roadmap.
 
 Includes:
 
 * HSM / KMS / Vault integration
-* Extended audit + compliance engine
-* Prometheus, Grafana, Splunk, Kafka connectors
-* Docker / Helm / Systemd templates
-* ISO · IEC · NIST compliance baselines
-* Early alignment with **EU NIS2** and **Digital Hygiene 2027**
+* Extended policy and audit engine
+* Prometheus, Grafana, Splunk, and Kafka observability connectors
+* Deployment assets (systemd, Helm, Docker)
+* Compliance documentation (ISO · IEC · NIST · NIS2)
 
 ---
 
 ## 🤝 Community & Governance
 
 * **License:** Apache-2.0
-* **Ownership:** All trademarks © PAXECT Systems
-* **Core Decisions:** Require owner approval
-* **Contributions:** Open via PRs (must pass CI)
-* **Conduct:** See [`CODE_OF_CONDUCT.md`](./CODE_OF_CONDUCT.md)
+* **Ownership:** All PAXECT trademarks and brand assets remain property of the Owner.
+* **Contributions:** PRs welcome; feature branches must pass deterministic CI pipelines.
+* **Core merges:** Require owner approval for brand or architecture-sensitive changes.
+* **Community Conduct:** See [`CODE_OF_CONDUCT.md`](./CODE_OF_CONDUCT.md)
+
+Join as a maintainer or contributor — see [`CONTRIBUTING.md`](./CONTRIBUTING.md) for details.
 
 ---
 
-## 🔄 Maintenance Policy
+## 🔄 Updates & Maintenance
 
-* Open contribution model
-* No fixed schedule — only verified, deterministic updates
-* Focused on reproducibility, auditability, and cross-platform consistency
+**PAXECT Core Complete** follows an open contribution and verification-first model:
+
+* No fixed release schedule — determinism prioritized over speed.
+* Verified updates only, across OSes and environments.
+* Maintainers focus on innovation, reproducibility, and architecture quality.
 
 ---
 
 ## 💠 Sponsorships & Enterprise Support
 
-**PAXECT Core Complete** is a verified, plug-and-play enterprise bundle unifying all PAXECT modules.
-Sponsorships fund continuous cross-platform validation, reproducibility testing, and deterministic compliance across Linux, macOS, and Windows.
+**PAXECT Core Complete** is a verified, plug-and-play runtime ecosystem unifying all PAXECT modules.
+Sponsorships fund ongoing cross-platform validation, reproducibility testing, and audit compliance
+for deterministic and secure data pipelines across **Linux**, **Windows**, and **macOS**.
 
-**Enterprise Options**
+### Enterprise Sponsorship Options
 
-* Cross-OS validation & QA
-* Deterministic CI/CD testing
-* OEM and observability partnerships
-* Long-term reproducibility assurance
+* Infrastructure validation and multi-OS QA
+* Deterministic CI/CD performance testing
+* OEM and observability integration partnerships
+* Extended reproducibility assurance for regulated industries
 
-💌 **Contact:** enterprise@[PAXECT-Team@outlook.com](mailto:PAXECT-Team@outlook.com)
-🤝 **Sponsor:** [GitHub Sponsors → PAXECT-Interface](https://github.com/sponsors/PAXECT-Interface)
+### Get Involved
 
----
+* 💠 [Become a GitHub Sponsor](https://github.com/sponsors/PAXECT-Interface)
+* 📧 Enterprise or OEM inquiries: **enterprise@[PAXECT-Team@outlook.com](mailto:PAXECT-Team@outlook.com)**
 
-## ⚖️ Governance & Ownership
-
-* **License:** Apache-2.0 (code only)
-* **Trademark:** PAXECT™ name and logo remain proprietary
-* **Owner:** PAXECT Systems
-* **Approved merges:** Owner or designated maintainers only
+> Sponsorships help sustain open, verifiable, and enterprise-ready innovation.
 
 ---
 
-## 🛡️ Path to Paid — PAXECT Core Complete
+## Governance & Ownership
 
-PAXECT remains **free and open-source at its foundation**.
-Enterprise contributions fund deterministic validation and ecosystem stability.
-
-**Principles**
-
-* Core stays free forever
-* Global 6-month free enterprise window (renewable)
-* Transparency, fairness, sustainability
+* **Ownership:** All PAXECT products and trademarks (PAXECT™ name + logo) remain the property of the Owner.
+* **License:** Source code under Apache-2.0; trademark rights are **not** granted by the license.
+* **Core decisions:** Architectural merges for Core and brand repos require Owner approval.
+* **Contributions:** PRs reviewed under CODEOWNERS and branch protection.
+* **Brand Use:** Do not use PAXECT branding for derivatives without written permission. See `TRADEMARKS.md`.
 
 ---
 
-## 📅 Launch Summary — October 2025
+## Path to Paid — Sustainable Open Source
 
-* Version 1.0 — Initial Public Release
-* Deterministic pipelines validated across Linux, macOS, Windows
-* AEAD Hybrid, Polyglot, SelfTune, Link verified compatible
-* Offline-first and zero-AI confirmed
-* Audit-ready for enterprise and research use
+**PAXECT Core Complete** is free and open-source at its foundation.
+Sustainable sponsorship ensures long-term maintenance, reproducibility, and enterprise adoption.
 
----
+### Principles
 
-## 🔖 SEO Topics & Keywords
+* Core remains free forever — no vendor lock-in.
+* Full transparency, open changelogs, and audit-ready releases.
+* Global 6-month free enterprise window after public release.
+* Community-driven decision-making on renewals and roadmap.
 
-paxect, paxect-core-complete, deterministic, reproducible, offline-first, data-pipeline, audit-ready, secure, encryption, aead, hybrid-aes, cross-platform, polyglot, link-plugin, selftune, observability, zero-telemetry, privacy-by-design, digital-hygiene, nis2, open-source, container, ecosystem, runtime, compression, zstandard, crc32, sha256, automation, ci-cd
+### Why This Matters
 
----
-
-📧 **Contact:** [PAXECT-Team@outlook.com](mailto:PAXECT-Team@outlook.com)
-🌐 **Website:** [https://github.com/PAXECT-Interface/paxect-core-complete](https://github.com/PAXECT-Interface/paxect-core-complete)
-🧩 **Related Projects:** [Core Plugin](https://github.com/PAXECT-Interface/paxect-core-plugin) · [AEAD Hybrid](https://github.com/PAXECT-Interface/paxect-aead-hybrid-plugin) · [Polyglot](https://github.com/PAXECT-Interface/paxect-polyglot-plugin) · [SelfTune](https://github.com/PAXECT-Interface/paxect-selftune-plugin) · [Link](https://github.com/PAXECT-Interface/paxect-link-plugin)
+* Motivates contributors with lasting value.
+* Ensures reproducible stability for enterprises.
+* Balances open innovation with sustainable funding.
 
 ---
 
-© 2025 PAXECT Systems — All rights reserved.
+### Contact
+
+📧 **[PAXECT-Team@outlook.com](mailto:PAXECT-Team@outlook.com)**
+💬 [Issues](https://github.com/PAXECT-Interface/paxect-core-plugin/issues)
+💭 [Discussions](https://github.com/PAXECT-Interface/paxect-core-plugin/discussions)
+
+*For security disclosures, please follow responsible reporting procedures.*
+
+---
+
+Copyright © 2025 **PAXECT Systems** — All rights reserved.
 
 
 
