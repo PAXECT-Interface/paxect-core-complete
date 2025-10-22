@@ -12,11 +12,12 @@
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE)
 
 # PAXECT Core Complete
+**Status:** v1.0.0 — Initial Public Release — October 22, 2025
 
 **Deterministic, offline-first runtime ecosystem for secure, reproducible, and auditable data pipelines.**  
 Cross-platform, self-tuning, and open-source — built for real-world enterprise innovation, digital hygiene, and NIS2-aligned compliance.
 
-**Status:** v1.0.0 — Initial Public Release — October 22, 2025
+
 
 ---
 
