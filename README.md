@@ -111,6 +111,7 @@ paxect-core-complete/
 
 ![PAXECT Architecture](docs/paxect_architecture_brand_v18.svg)
 
+
 ---
 
 ## Plugins (Official)
