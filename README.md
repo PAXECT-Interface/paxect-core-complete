@@ -1,4 +1,4 @@
-
+https://github.com/PAXECT-Interface/paxect-core-complete/blob/main/ChatGPT%20Image%202%20okt%202025%2C%2022_33_51.png
 
 
 [![Star this repo](https://img.shields.io/badge/⭐%20Star-this%20repo-orange)](../../stargazers)
