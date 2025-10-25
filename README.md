@@ -14,10 +14,16 @@
   <img alt="Release" src="https://img.shields.io/github/v/release/PAXECT-Interface/paxect-core-complete?label=complete">
 </a>
 
+#  PAXECT — The Universal Deterministic Bridge
+Build once, run anywhere. Connect all operating systems and programming languages through one reproducible, offline-first runtime.
+🌐 Learn more about the ecosystem: [PAXECT Universal Bridge](https://github.com/PAXECT-Interface/paxect-universal-bridge)
+
+---
+
+
 # PAXECT Core Complete
 **Status:** v1.0.0 — Initial Public Release — October 22, 2025
 
-> 🌐 Learn more about the ecosystem: [PAXECT Universal Bridge](https://github.com/PAXECT-Interface/paxect-universal-bridge)
 
 
 **Deterministic, offline-first runtime ecosystem for secure, reproducible, and auditable data pipelines.**  
