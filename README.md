@@ -17,6 +17,9 @@
 # PAXECT Core Complete
 **Status:** v1.0.0 — Initial Public Release — October 22, 2025
 
+> 🌐 Learn more about the ecosystem: [PAXECT Universal Bridge](https://github.com/PAXECT-Interface/paxect-universal-bridge)
+
+
 **Deterministic, offline-first runtime ecosystem for secure, reproducible, and auditable data pipelines.**  
 Cross-platform, self-tuning, and open-source — built for real-world enterprise innovation, digital hygiene, and NIS2-aligned compliance.
 
