@@ -84,7 +84,7 @@ Then run any of the integrated demos from the `demos/` folder to validate determ
 
 ```
 paxect-core-complete/
-├── paxect_core.py
+├── paxect_core_plugin.py
 ├── paxect_aead_hybrid_plugin.py
 ├── paxect_polyglot_plugin.py
 ├── paxect_selftune_plugin.py
@@ -116,7 +116,7 @@ paxect-core-complete/
 
 | Module                           | Purpose                                                           |
 | -------------------------------- | ----------------------------------------------------------------- |
-| **paxect_core.py**               | Deterministic runtime · encode/decode · CRC32 + SHA-256 checksums |
+| **paxect_core_plugin.py**               | Deterministic runtime · encode/decode · CRC32 + SHA-256 checksums |
 | **paxect_aead_hybrid_plugin.py** | Hybrid AES-GCM / ChaCha20-Poly1305 encryption for data integrity  |
 | **paxect_polyglot_plugin.py**    | Cross-language bridge · UTF-safe transformation between runtimes  |
 | **paxect_selftune_plugin.py**    | Adaptive ε-greedy self-tuning · resource-aware control · no AI    |
