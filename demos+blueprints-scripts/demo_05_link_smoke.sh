@@ -3,7 +3,7 @@ set -u
 
 # Find script location and project root
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
+ROOT_DIR="${SCRIPT_DIR}"
 
 TMP_BASE="/tmp/paxect_demo_05"
 BASEFILE="${TMP_BASE}/paxect_link_hashes.baseline"
