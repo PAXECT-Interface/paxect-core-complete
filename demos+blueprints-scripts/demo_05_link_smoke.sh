@@ -1,23 +1,12 @@
 #!/usr/bin/env bash
-# PAXECT Demo 05 — Link Smoke Test
-# Usage:
-#   chmod +x demo_05_link_smoke.sh
-#   ./demo_05_link_smoke.sh
-#
-# What it does:
-# - Ensures key files exist
-# - Fixes line endings (optional, if dos2unix present)
-# - Makes main scripts executable
-# - Checks basic inbox/outbox dirs for Link plugin
-# - Computes SHA256 of key files and compares with baseline
-# - Prints NO DRIFT ✅ if hashes match, otherwise shows diffs
-
 set -u
 
-ROOT_DIR="$(pwd)"
+# Find script location and project root
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
 TMP_BASE="/tmp/paxect_demo_05"
 BASEFILE="${TMP_BASE}/paxect_link_hashes.baseline"
-
 mkdir -p "${TMP_BASE}"
 
 FILES=(
@@ -29,97 +18,61 @@ FILES=(
 )
 
 echo "=== PAXECT Demo 05 — Link Smoke Test ==="
-echo "Working dir: ${ROOT_DIR}"
+echo "Project root: ${ROOT_DIR}"
 echo
 
-# 1) Verify files exist
 missing=0
 for f in "${FILES[@]}"; do
-  if [ ! -f "${f}" ]; then
+  if [ ! -f "${ROOT_DIR}/${f}" ]; then
     echo "MISSING: ${f}"
     missing=$((missing+1))
   else
-    echo "FOUND : ${f}"
+    echo "FOUND: ${f}"
   fi
 done
 
 if [ "${missing}" -gt 0 ]; then
   echo
-  echo "ERROR: ${missing} files missing. Place them in the current directory and re-run."
+  echo "ERROR: ${missing} files missing in ${ROOT_DIR}"
   exit 1
 fi
-echo
 
-# 2) Normalize line endings if dos2unix available
+echo
 if command -v dos2unix >/dev/null 2>&1; then
-  echo "dos2unix: normalizing line endings for script files..."
+  echo "Normalizing line endings..."
   for f in "${FILES[@]}"; do
-    dos2unix -q "${f}" || true
+    dos2unix -q "${ROOT_DIR}/${f}" 2>/dev/null || true
   done
-else
-  echo "dos2unix not found — skipping line ending normalization (ok on Unix systems)."
 fi
-echo
 
-# 3) Make main scripts executable
-echo "Setting +x on detected script files..."
+echo
+echo "Setting executable permissions..."
 for f in "${FILES[@]}"; do
-  chmod +x "${f}" || true
+  chmod +x "${ROOT_DIR}/${f}" 2>/dev/null || true
 done
-echo "Done."
+
 echo
-
-# 4) Check Link plugin default dirs
-LINK_INBOX="${HOME}/inbox"
-LINK_OUTBOX="${HOME}/outbox"
-LINK_POLICY="${HOME}/link_policy.json"
-
-echo "Checking link paths:"
-[ -d "${LINK_INBOX}" ] && echo "Inbox exists: ${LINK_INBOX}" || echo "Inbox missing: ${LINK_INBOX} (ok if not used)"
-[ -d "${LINK_OUTBOX}" ] && echo "Outbox exists: ${LINK_OUTBOX}" || echo "Outbox missing: ${LINK_OUTBOX} (ok if not used)"
-[ -f "${LINK_POLICY}" ] && echo "Policy file exists: ${LINK_POLICY}" || echo "Policy file missing: ${LINK_POLICY} (ok if not used)"
-echo
-
-# 5) Compute current hashes
 HASHFILE="${TMP_BASE}/current_hashes.txt"
-echo "Computing SHA256 of files..."
+echo "Computing SHA256..."
 > "${HASHFILE}"
 
 for f in "${FILES[@]}"; do
-  if command -v sha256sum >/dev/null 2>&1; then
-    sha256sum "${f}" >> "${HASHFILE}"
-  elif command -v shasum >/dev/null 2>&1; then
-    shasum -a 256 "${f}" >> "${HASHFILE}"
-  else
-    python3 -c "
-import hashlib
-fn='${f}'
-h=hashlib.sha256(open(fn,'rb').read()).hexdigest()
-print(h + '  ' + fn)
-" >> "${HASHFILE}"
-  fi
+  (cd "${ROOT_DIR}" && sha256sum "${f}" 2>/dev/null || shasum -a 256 "${f}" 2>/dev/null) >> "${HASHFILE}"
 done
 
-echo "Hashes written to: ${HASHFILE}"
-echo
-
-# 6) Compare with baseline (or create baseline if missing)
 if [ ! -f "${BASEFILE}" ]; then
   cp "${HASHFILE}" "${BASEFILE}"
-  echo "Baseline created at ${BASEFILE} (first run)."
-  echo "NO DRIFT ✅ (baseline established)."
+  echo "✓ Baseline created"
+  echo "✓ NO DRIFT"
   exit 0
 fi
 
-echo "Comparing with baseline ${BASEFILE} ..."
 if diff -u "${BASEFILE}" "${HASHFILE}" >/dev/null 2>&1; then
-  echo "NO DRIFT ✅ — current file hashes match baseline."
+  echo "✓ NO DRIFT — hashes match"
   exit 0
 else
-  echo "DRIFT DETECTED ❗ — file hash differences:"
+  echo "✗ DRIFT DETECTED"
   diff -u "${BASEFILE}" "${HASHFILE}" || true
-  echo
-  echo "If these changes are expected, update baseline with:"
-  echo "  cp ${HASHFILE} ${BASEFILE}"
   exit 2
 fi
+
