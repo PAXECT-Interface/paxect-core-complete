@@ -1,16 +1,5 @@
 #!/usr/bin/env python3
 """
-PAXECT Demo 07 – SelfTune Adaptive Loop
----------------------------------------
-Simulates adaptive epsilon-greedy tuning with persistent state.
-
-Each run:
- - Loads last epsilon & cycle from /tmp
- - Performs 10 cycles of exploit/explore
- - Adjusts epsilon based on performance
- - Saves new state back to disk
-#!/usr/bin/env python3
-"""
 PAXECT Demo 07 – Self-Tuning Adaptive System
 -------------------------------------------
 Shows how PAXECT adapts automatically without manual configuration.
@@ -106,5 +95,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-Logfile: /tmp/paxect_enterprise_stability.jsonl
