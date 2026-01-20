@@ -11,7 +11,7 @@ mkdir -p "${TMP_BASE}"
 
 FILES=(
   "paxect_link_plugin.py"
-  "paxect_core.py"
+  "paxect_core_plugin.py"
   "paxect_aead_hybrid_plugin.py"
   "paxect_polyglot_plugin.py"
   "paxect_selftune_plugin.py"
