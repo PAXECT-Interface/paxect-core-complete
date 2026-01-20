@@ -15,7 +15,11 @@ def load_state():
     """Load previous learning state, or start fresh."""
     if STATE_PATH.exists():
         try:
-            return json.loads(STATE_PATH.read_text())
+            state = json.loads(STATE_PATH.read_text())
+            # Backward compatibility: convert old 'epsilon' to 'tuning_value'
+            if "epsilon" in state and "tuning_value" not in state:
+                state["tuning_value"] = state.pop("epsilon")
+            return state
         except Exception:
             pass
     return {"cycle": 0, "tuning_value": 0.3}
@@ -95,3 +99,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+ 
+ 
