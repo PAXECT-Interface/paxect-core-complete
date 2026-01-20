@@ -2,15 +2,10 @@
 """
 PAXECT Demo 01 – Quick Start
 -----------------------------
-Minimal startup test for developers.
-
-Goals:
-- Import main PAXECT modules
-- Run one short SelfTune adaptive step
-- Print structured JSON summary
+5-minute verification test for new users.
+Shows: Installation check + ready-to-use confirmation
 """
-
-import json, time, random, hashlib
+import json
 
 MODULES = [
     "paxect_core",
@@ -21,28 +16,42 @@ MODULES = [
 ]
 
 def main():
-    print("=== PAXECT Demo 01 – Quick Start ===")
-    results = []
+    print("=" * 60)
+    print("  PAXECT Quick Start – Installation Verification")
+    print("=" * 60)
+    print()
+    
+    # Check modules
+    all_ok = True
     for name in MODULES:
         try:
             __import__(name)
-            results.append({"module": name, "status": "OK"})
+            print(f"✓ {name:30} OK")
         except Exception as e:
-            results.append({"module": name, "status": "FAIL", "error": str(e)})
-
-    # simple selftune sample
-    eps = 0.1
-    mode = "explore" if random.random() < eps else "exploit"
-    checksum = hashlib.sha256(mode.encode()).hexdigest()[:12]
-    summary = {
-        "epsilon": eps,
-        "mode": mode,
-        "checksum": checksum,
-        "modules_ok": sum(1 for r in results if r["status"] == "OK"),
-    }
-
-    print(json.dumps({"modules": results, "selftune": summary}, indent=2))
-    print("\n[OK] Demo 01 finished successfully")
+            print(f"✗ {name:30} FAILED: {e}")
+            all_ok = False
+    
+    print()
+    print("=" * 60)
+    
+    if all_ok:
+        print("✓ SUCCESS: PAXECT is ready to use!")
+        print()
+        print("Next steps:")
+        print("  → Process messages:    python3 demos/demo_02_integration_loop.py")
+        print("  → Test encryption:     python3 demos/demo_08_secure_multichannel_aead_hybrid.py")
+        print("  → Full enterprise:     python3 demos/demo_09_enterprise_all_in_one.py")
+        print()
+        print("Documentation: https://github.com/PAXECT-Interface/paxect-core-complete")
+    else:
+        print("✗ INSTALLATION INCOMPLETE")
+        print()
+        print("Fix: Run installation again:")
+        print("  pip install -e .")
+        return 1
+    
+    print("=" * 60)
+    return 0
 
 if __name__ == "__main__":
-    main()
+    exit(main())
