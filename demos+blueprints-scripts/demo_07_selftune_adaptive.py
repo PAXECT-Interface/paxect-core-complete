@@ -9,8 +9,13 @@ Each run:
  - Performs 10 cycles of exploit/explore
  - Adjusts epsilon based on performance
  - Saves new state back to disk
+#!/usr/bin/env python3
 """
-
+PAXECT Demo 07 – Self-Tuning Adaptive System
+-------------------------------------------
+Shows how PAXECT adapts automatically without manual configuration.
+Runs 10 cycles and learns optimal settings over time.
+"""
 import json, random, time, tempfile
 from pathlib import Path
 
@@ -18,81 +23,88 @@ STATE_PATH = Path(tempfile.gettempdir()) / "paxect_demo_07_selftune_state.json"
 CYCLES = 10
 
 def load_state():
+    """Load previous learning state, or start fresh."""
     if STATE_PATH.exists():
         try:
             return json.loads(STATE_PATH.read_text())
         except Exception:
             pass
-    return {"cycle": 0, "epsilon": 0.3}
+    return {"cycle": 0, "tuning_value": 0.3}
 
 def save_state(state):
+    """Save learning progress for next run."""
     STATE_PATH.write_text(json.dumps(state))
 
 def run_cycle(state):
-    eps = state["epsilon"]
+    """Run one adaptive cycle - system learns and adjusts."""
+    tuning = state["tuning_value"]
     cycle = state["cycle"] + 1
-    mode = "explore" if random.random() < eps else "exploit"
-    reward = random.uniform(0.2, 1.0) if mode == "exploit" else random.uniform(0.0, 0.8)
-    success = reward > 0.7
-    # adjust epsilon: decay if successful exploit, increase slightly if not
-    if success and mode == "exploit":
-        eps = max(0.05, eps * 0.95)
-    elif not success:
-        eps = min(0.5, eps + 0.05)
-    state.update({"cycle": cycle, "epsilon": round(eps, 3)})
-    return {"cycle": cycle, "mode": mode, "reward": round(reward, 3),
-            "success": success, "epsilon_next": round(eps, 3)}
+    
+    # System decides: try new approach or use proven method
+    trying_new = random.random() < tuning
+    mode = "exploring" if trying_new else "optimized"
+    
+    # Simulate performance (exploring is riskier but can find better solutions)
+    performance = random.uniform(0.2, 1.0) if not trying_new else random.uniform(0.0, 0.8)
+    good_result = performance > 0.7
+    
+    # System learns: if optimized approach works, use it more; if fails, explore more
+    if good_result and not trying_new:
+        tuning = max(0.05, tuning * 0.95)  # reduce exploration
+    elif not good_result:
+        tuning = min(0.5, tuning + 0.05)   # increase exploration
+    
+    state.update({"cycle": cycle, "tuning_value": round(tuning, 3)})
+    
+    return {
+        "cycle": cycle,
+        "mode": mode,
+        "performance": round(performance, 3),
+        "status": "good" if good_result else "poor",
+        "tuning_next": round(tuning, 3)
+    }
 
 def main():
-    print("=== PAXECT Demo 07 – SelfTune Adaptive Loop ===")
+    print("=" * 70)
+    print("  PAXECT Demo 07 – Self-Tuning Adaptive System")
+    print("=" * 70)
+    print()
+    
     state = load_state()
-    print(f"Loaded state: {state}")
-    history = []
-    for _ in range(CYCLES):
-        res = run_cycle(state)
-        history.append(res)
-        print(f"[cycle {res['cycle']:03d}] mode={res['mode']:<7} reward={res['reward']:.3f} "
-              f"success={res['success']} -> epsilon={res['epsilon_next']}")
-        time.sleep(0.2)
+    
+    if state["cycle"] > 0:
+        print(f"[INFO] Continuing from previous run (cycle {state['cycle']})")
+    else:
+        print("[INFO] Starting fresh - system will learn optimal settings")
+    
+    print(f"       Current tuning: {state['tuning_value']:.1%} exploration")
+    print()
+    print("Running 10 adaptive cycles...")
+    print("-" * 70)
+    
+    for i in range(CYCLES):
+        result = run_cycle(state)
+        
+        print(f"Cycle {result['cycle']:3d}: {result['mode']:10} | "
+              f"Performance: {result['performance']:.2f} ({result['status']:4}) | "
+              f"Tuning: {result['tuning_next']:.1%}")
+        
+        time.sleep(0.15)
+    
+    print("-" * 70)
+    print()
+    print("[SUCCESS] Adaptive learning complete")
+    print(f"          Final tuning level: {state['tuning_value']:.1%} exploration")
+    print(f"          Total cycles run: {state['cycle']}")
+    print()
+    print(f"          Progress saved to: {STATE_PATH}")
+    print("          Run again to continue learning from where it left off")
+    print()
+    print("=" * 70)
+    
     save_state(state)
-    print(f"\nFinal state saved to {STATE_PATH}: {state}")
-    return history
 
 if __name__ == "__main__":
     main()
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-=========/etc/systemd/system/paxect-enterprise-stability.service================
-use:sudo
--------------------------------------------------------------
-[Unit]
-Description=PAXECT Enterprise Stability Demo
-After=network.target
-
-[Service]
-Type=simple
-User=YOUR_USER_HERE
-WorkingDirectory=/home/pd-sa-micro
-ExecStart=/usr/bin/env python3 /home/pd-sa-micro/demo_enterprise_stability.py
-Restart=on-failure
-RestartSec=5
-Environment=SAFE_MODE=0
-StandardOutput=append:/var/log/paxect_enterprise_stability.log
-StandardError=append:/var/log/paxect_enterprise_stability.log
-
-[Install]
-WantedBy=multi-user.target
---------------------------------------after---------------------
-sudo systemctl daemon-reload
-sudo systemctl enable --now paxect-enterprise-stability.service
-sudo journalctl -u paxect-enterprise-stability -f
-
-chmod +x demo_enterprise_stability.py
-SAFE_MODE=1 RUN_SECONDS=60 ITERATION_S=5 python3 demo_enterprise_stability.py
-----------------------------------------------------------------
-for 24h. run
-
-chmod +x demo_enterprise_stability.py
-python3 demo_enterprise_stability.py
 
 Logfile: /tmp/paxect_enterprise_stability.jsonl
