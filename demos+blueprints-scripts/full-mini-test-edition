@@ -22,7 +22,7 @@ RESULTS = []
 def test_core():
     """Mini encode/decode cycle using in-memory data."""
     try:
-        import paxect_core as core
+        import paxect_core_plugin as core
         sample = b"PAXECT-DEMO-CORE"
         digest = hashlib.sha256(sample).hexdigest()
         # Simulate deterministic encode/decode
