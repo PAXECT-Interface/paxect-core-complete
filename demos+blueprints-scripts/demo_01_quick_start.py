@@ -39,7 +39,7 @@ def main():
         print()
         print("Next steps:")
         print("  → Process messages:    python3 demos/demo_02_integration_loop.py")
-        print("  → Test encryption:     python3 demos/demo_08_secure_multichannel_aead_hybrid.py")
+        print("  → Test encryption:     python3 demos/demo_08_secure_multichannel_aead_hybrid_plugin.py")
         print("  → Full enterprise:     python3 demos/demo_09_enterprise_all_in_one.py")
         print()
         print("Documentation: https://github.com/PAXECT-Interface/paxect-core-complete")
