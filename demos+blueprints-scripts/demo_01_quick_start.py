@@ -8,7 +8,7 @@ Shows: Installation check + ready-to-use confirmation
 import json
 
 MODULES = [
-    "paxect_core",
+    "paxect_core_plugin",
     "paxect_aead_hybrid_plugin",
     "paxect_polyglot_plugin",
     "paxect_selftune_plugin",
